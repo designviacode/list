@@ -1,0 +1,90 @@
+extends layout
+
+block content
+ 
+  include mixins/_navbar.pug  
+  section.main
+
+  section.main
+    section.navbar
+      .menu-item
+        
+    section.sidebar
+      div.menu__items
+        p Trending Categories
+          div#nav_lists 
+            p Sports
+            button(id='list_btn') See List
+          div#nav_lists 
+            p Tech
+            button(id='list_btn') See List
+          div#nav_lists 
+            p VIP
+            button(id='list_btn') See List
+          div#nav_lists 
+            p Politics
+            button(id='list_btn') See List
+          div#nav_lists 
+            p Travel 
+            button(id='list_btn') See List
+          div#nav_lists 
+            p Food
+            button(id='list_btn') See List
+      div.menu__items
+          a.button(href='/create' id='creater_btn') + Create new list
+      div.menu__items
+        div.sponsorship
+          a Advertisment
+          a.button Sponsor List 
+      
+    section.content
+      each post in data
+        h1= post['question'] 
+        .menu
+          a.item(href='Best') Best
+          a.item(href='New') New
+          ul#list 
+            li#items
+              div.rating_box
+              - var values = [];
+                ul
+                  each val in post['listitem']
+                    div.listitem
+                      .rating_button 
+                        button.btn(id="plus") &#x2B06
+                        p#count 0 
+                        button.btn(id="minus") &#x2B07
+                      li
+                        p#rating_item= val
+        .share_container
+          p Share:
+          a Reddit
+          a Twitter
+          a Facebook
+          
+        div.add_newitems
+          a.button#add_btn + Add Post
+          //- a.button(href='/create') + Create new Post
+        
+        // The Modal
+        #myModal.modal
+          // Modal content
+          .modal-content
+            span.close ×
+            form(action='/add/'+post._id, method='POST')
+              div.fields
+                  label(for='name') List it:
+                  input#name(type='text', name='listitem' placeholder='Add your idea to the list')
+              .button
+                  button(type='submit') + Add 
+            //- a.button(href='/sponsorship') Sponsor this list
+      //- include mixins/_madeby.pug
+    script.
+      var upvote = $("#plus"); 
+      var downvote = $("#minus");
+      var number = $("#count");
+      $(upvote).click(function(e){
+            e.preventDefault();
+            console.log('click');
+            
+        });

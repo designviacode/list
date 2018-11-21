@@ -1,0 +1,62 @@
+extends layout
+block content
+    include mixins/_navbar.pug  
+    
+    section.maincontentform
+        
+        form(action='/createlist' method='POST' class='createform')
+            .header_form
+                h1 Create your list
+                p Complete the below fields to create your list
+            div.fields
+                label(for='name') Title:
+                input#name(type='text', name='question' placeholder='Eg.: What is the best Fitness App? or The best places in Barcelona')
+            //- div.fields
+            //-     label(for='suggestions') Vote Items:
+            //-     input#name(type='text', name='listitem' placeholder='Eg. Lionel Messi')
+            div.fields(id='voting')
+                label(for='suggestions') Vote Items:
+                input#name(type='text', name='listitem' placeholder='Eg. Lionel Messi', )
+            //- .input_fields_wrap
+            //-     input.field-long(type='text', name='listitem' placeholder='Eg. Lionel Messi')
+            button.add_field_button(type='button') Add Field +
+            //- button.remove_field_button(type='button') Remove Field
+            //- button.remove_field_button(type='button') Remove Field
+            //- .input_fields_wrap
+            //-     input.field-long(type='text', name='answer[]')
+            //-     input.field-long(type='text', name='answer[]')
+            //-     input.field-long(type='text', name='answer[]')
+            .fields
+                label(for='category') Category
+                select#category_select(name='category')
+                    option(value='Sports') Sports
+                    option(value='Tech') Tech
+                    option(value='Travel') Travel
+                    option(value='Life') Life
+                    option(value='Books') Books
+                    option(value='Music') Music
+                    option(value='Movies') Movies
+                    option(value='Clothing') Clothing
+            .button
+                button(type='submit' id='creater_btn') Create your list
+        
+    script.
+        var max_fields      = 10;
+        var wrapper         = $("#voting"); 
+        var add_button      = $(".add_field_button");
+        var remove_button   = $(".remove_field_button");
+
+        $(add_button).click(function(e){
+            e.preventDefault();
+            var total_fields = wrapper[0].childNodes.length;
+            if(total_fields < max_fields){
+                $(wrapper).append('<input type="text" name="listitem" id="name" placeholder="New Option" />');
+            }
+        });
+        $(remove_button).click(function(e){
+            e.preventDefault();
+            var total_fields = wrapper[0].childNodes.length;
+            if(total_fields>1){
+                wrapper[0].childNodes[total_fields-1].remove();
+            }
+        });            

@@ -1,0 +1,15 @@
+extends layout
+//- include mixins/_navbar.pug
+block content
+    .inner
+        form(action='/register', method='post')
+            h2 Create new account
+            label(for="name") Name
+            input(type='text', name='name', placeholder='Enter Name' required)
+            label(for='email') Email
+            input(type='email', name='email' required)
+            label(for='password') Password 
+            input(type='password' name='password')
+            label(for='password-confirm') Password Confirm
+            input(type='password' name='password-confirm')
+            input.button(type='submit' value='Register')                  

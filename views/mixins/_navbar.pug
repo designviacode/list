@@ -1,0 +1,25 @@
+.Navbar
+      .Navbar__Link.Navbar__Link-brand
+        a(href='/')
+          | ListIt
+      .Navbar__Link.Navbar__Link-toggle
+        i.fas.fa-bars
+      //- nav.Navbar__Items
+      //-   .Navbar__Link
+      //-     | Home
+        //- .Navbar__Link
+        //-   | Longer Link
+        //- .Navbar__Link
+        //-   | Link
+      nav.Navbar__Items.Navbar__Items--right
+        .Navbar__Link
+          a(href='/createAccount')
+            | Sign Up
+        .Navbar__Link
+          | Login
+script.
+  function classToggle() {
+          const navs = document.querySelectorAll('.Navbar__Items') 
+          navs.forEach(nav => nav.classList.toggle('Navbar__ToggleShow'));
+        }
+        document.querySelector('.Navbar__Link-toggle').addEventListener('click', classToggle);
