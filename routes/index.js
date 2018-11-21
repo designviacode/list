@@ -6,7 +6,7 @@ var userController = require('../controllers/userController');
 var authController = require('../controllers/authController');
 var async = require("async");
 var post = require('../models/post');
-var user = require('../models/User');
+var user = require('../models/user');
 var passport = require('../config/passport');
 var {
   catchErrors
@@ -20,7 +20,7 @@ router.get('/', async function (req, res, next) {
     data: data
   });
 });
-// user management 
+// user management
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/register', userController.registerForm);

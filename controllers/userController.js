@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const User = mongoose.model('user');
 const {
     promisify
 } = require("es6-promisify");
@@ -43,19 +43,26 @@ exports.registerForm = (req, res) => {
 
 
 exports.register = async (req, res, next) => {
-    const user = new User({
-        name: req.body.name,
-
-        email: req.body.email
-    });
+    let { name, email, password } = req.body;
+    let user = {
+      name,
+      email,
+      password
+    };
+    console.log(user);
 
     // await user.setPassword(req.body.password);
-    console.log(user);
     // const register = promisify(User.register, User);
-    await User.register(user, req.body.password);
-    // await user.save();
+    let responseUser = await User.create([user], function (err, registeredUser) {
+      if (err) {
+        console.error(err);
+        return err;
+      }
 
-    next();
+      return registeredUser;
+    });
+
+    next(responseUser);
 }
 
 

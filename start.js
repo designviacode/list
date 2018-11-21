@@ -18,7 +18,7 @@ console.log('connected baby');
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // Start our app!
-require('./models/User');
+require('./models/user');
 require('./models/post');
 require('./models/vote');
 
